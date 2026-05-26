@@ -6,6 +6,7 @@ import {
   CheckCircle2,
   CreditCard,
   FileCode2,
+  GitCompareIcon,
   Inbox,
   Layers3,
   LayoutDashboard,
@@ -52,7 +53,6 @@ import {
   Skeleton,
   Stack,
   StatCard,
-  Steps,
   Table,
   Textarea,
   Timeline,
@@ -124,7 +124,7 @@ const tableRows = [
 
 const navItems = [
   { label: "Dashboard", href: "#navigationbar", icon: LayoutDashboard, active: true },
-  { label: "Trips", href: "#steps", icon: Truck, badge: "8" },
+  { label: "Trips", href: "#table", icon: Truck, badge: "8" },
   { label: "Settings", href: "#menu", icon: Settings2 },
 ];
 
@@ -301,11 +301,6 @@ function StorybookLanding() {
         { name: "value", type: "ReactNode", description: "Large metric value." },
         { name: "size", type: "\"sm\" | \"md\"", defaultValue: "\"md\"", description: "Card height and value scale." },
       ]),
-      story("steps", "Steps", "Display", "Responsive process tracker.", "@rahulapgm/skyblue-ui", <Steps current={2} items={[{ title: "Booked", description: "Customer confirmed" }, { title: "Assigned", description: "Team accepted" }, { title: "Delivered", description: "Proof uploaded" }]} />, `<Steps current={2} items={[{ title: "Booked" }, { title: "Assigned" }]} />`, [
-        { name: "items", type: "{ title: string; description?: string }[]", description: "Step content." },
-        { name: "current", type: "number", description: "One-based active step." },
-        commonClassName,
-      ]),
       story("table", "Table", "Data", "Typed table with custom cell rendering and empty state.", "@rahulapgm/skyblue-ui", <Table rows={tableRows} rowKey={(row) => row.id} columns={[{ key: "customer", header: "Customer", render: (row) => row.customer }, { key: "status", header: "Status", render: (row) => <Badge tone={row.status === "Delivered" ? "success" : "brand"}>{row.status}</Badge> }, { key: "amount", header: "Amount", align: "right", render: (row) => row.amount }]} />, `<Table rows={rows} columns={columns} rowKey={(row) => row.id} />`, [
         { name: "columns", type: "TableColumn<T>[]", description: "Column definitions with render callbacks." },
         { name: "rows", type: "T[]", description: "Table data." },
@@ -386,7 +381,8 @@ function StorybookLanding() {
     [autocompleteValue, drawerOpen, dropdownValue, modalOpen, numberValue, page, switchChecked, toast],
   );
 
-  const groups = Array.from(new Set(stories.map((item) => item.group)));
+  const storyGroups = groupsFromStories(stories);
+  const storiesBySideNavOrder = storyGroups.flatMap(({ stories: groupStories }) => groupStories);
 
   return (
     <div className="skyblue-docs-shell">
@@ -401,23 +397,21 @@ function StorybookLanding() {
           </span>
         </a>
         <nav className="skyblue-docs-nav" aria-label="Component catalog">
-          {groups.map((group) => (
+          {storyGroups.map(({ group, stories: groupStories }) => (
             <div key={group} className="skyblue-docs-nav-group">
               <p className="type-overline text-(--ink-subtle)">{group}</p>
-              {stories
-                .filter((item) => item.group === group)
-                .map((item) => (
-                  <a key={item.id} href={`#${item.id}`}>
-                    {item.name}
-                  </a>
-                ))}
+              {groupStories.map((item) => (
+                <a key={item.id} href={`#${item.id}`}>
+                  {item.name}
+                </a>
+              ))}
             </div>
           ))}
         </nav>
       </aside>
 
       <main id="top" className="skyblue-docs-main">
-        <Grid cols={1} md={2} gap="md" className="skyblue-docs-metrics">
+        <Grid cols={1} md={3} gap="md" className="skyblue-docs-metrics">
           <Metric
             label="Package"
             value={
@@ -433,10 +427,24 @@ function StorybookLanding() {
             icon={<PackageCheck />}
           />
           <Metric label="Components" value={stories.length} tone="brand" icon={<Layers3 />} />
-=        </Grid>
+          <Metric
+            label="Github"
+            value={
+              <a
+                className="skyblue-docs-package-link"
+                href="https://github.com/rahulapgm/skyblue-ui"
+                target="_blank"
+                rel="noreferrer"
+              >
+                skyblue-ui
+              </a>
+            }
+            icon={<GitCompareIcon />}
+          />
+        </Grid>
 
         <div className="skyblue-docs-list">
-          {stories.map((item) => (
+          {storiesBySideNavOrder.map((item) => (
             <article key={item.id} id={item.id} className="skyblue-docs-story">
               <header>
                 <div>
@@ -506,6 +514,13 @@ function story(
   props: PropRow[],
 ): ComponentStory {
   return { id, name, group, description, importPath, preview, code, props };
+}
+
+function groupsFromStories(stories: ComponentStory[]) {
+  return Array.from(new Set(stories.map((item) => item.group))).map((group) => ({
+    group,
+    stories: stories.filter((item) => item.group === group),
+  }));
 }
 
 function PreviewStatus({ label, value }: { label: string; value: string }) {
