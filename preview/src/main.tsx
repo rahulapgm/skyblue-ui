@@ -417,27 +417,6 @@ function StorybookLanding() {
       </aside>
 
       <main id="top" className="skyblue-docs-main">
-        <section className="skyblue-docs-hero">
-          <div>
-            <Badge tone="brand">Local component catalog</Badge>
-            <h1>Storybook-style preview for Skyblue UI.</h1>
-            <p>
-              Every exported component renders from the local package source with GetOttam theme tokens, Host
-              Grotesk typography, usage snippets, and prop notes.
-            </p>
-          </div>
-          <Cluster gap="sm">
-            <Button href="https://github.com/rahulapgm/skyblue-ui" variant="tertiary">
-              GitHub
-              <ArrowRight className="h-4 w-4" />
-            </Button>
-            <Button onClick={() => toast.showToast({ title: "Catalog is live", description: "Components are rendering locally.", tone: "success" })}>
-              Test toast
-              <Bell className="h-4 w-4" />
-            </Button>
-          </Cluster>
-        </section>
-
         <Grid cols={1} md={2} gap="md" className="skyblue-docs-metrics">
           <Metric
             label="Package"
