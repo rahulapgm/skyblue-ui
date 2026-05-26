@@ -1,5 +1,6 @@
 name: Deploy Preview
 
+# Builds and deploys the Vite component catalog to GitHub Pages.
 on:
   push:
     branches: [main]
