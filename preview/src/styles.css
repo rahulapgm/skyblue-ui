@@ -683,6 +683,18 @@ body {
   align-items: stretch;
 }
 
+.skyblue-docs-package-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.12em;
+  overflow-wrap: anywhere;
+}
+
+.skyblue-docs-package-link:hover {
+  color: var(--color-brand-primary);
+}
+
 .skyblue-docs-list {
   display: grid;
   gap: 1.5rem;

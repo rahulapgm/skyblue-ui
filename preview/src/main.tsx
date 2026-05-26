@@ -439,7 +439,20 @@ function StorybookLanding() {
         </section>
 
         <Grid cols={1} md={2} gap="md" className="skyblue-docs-metrics">
-          <Metric label="Package" value="@rahulapgm/skyblue-ui" icon={<PackageCheck />} />
+          <Metric
+            label="Package"
+            value={
+              <a
+                className="skyblue-docs-package-link"
+                href="https://www.npmjs.com/package/@rahulapgm/skyblue-ui"
+                target="_blank"
+                rel="noreferrer"
+              >
+                @rahulapgm/skyblue-ui
+              </a>
+            }
+            icon={<PackageCheck />}
+          />
           <Metric label="Components" value={stories.length} tone="brand" icon={<Layers3 />} />
 =        </Grid>
 
