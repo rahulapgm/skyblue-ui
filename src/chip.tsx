@@ -1,5 +1,3 @@
-"use client";
-
 import type { ButtonHTMLAttributes, HTMLAttributes, ReactNode } from "react";
 import { X } from "lucide-react";
 

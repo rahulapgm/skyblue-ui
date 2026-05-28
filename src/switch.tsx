@@ -1,5 +1,3 @@
-"use client";
-
 import type { InputHTMLAttributes } from "react";
 
 import { Label } from "./label";

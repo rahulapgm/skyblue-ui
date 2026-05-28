@@ -1,5 +1,3 @@
-"use client";
-
 import { useId, useState, type KeyboardEvent } from "react";
 
 import { Badge } from "./badge";

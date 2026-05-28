@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "next/link.js";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
 import { cn } from "./utils";

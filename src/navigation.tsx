@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "next/link.js";
 import type { ComponentType, MouseEventHandler, ReactNode } from "react";
 import { ChevronRight } from "lucide-react";
 

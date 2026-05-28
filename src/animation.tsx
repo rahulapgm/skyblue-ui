@@ -1,5 +1,3 @@
-"use client";
-
 import { motion, useReducedMotion, type HTMLMotionProps } from "framer-motion";
 import type { ReactNode } from "react";
 

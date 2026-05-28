@@ -1,5 +1,3 @@
-"use client";
-
 import { ChevronDown, Check } from "lucide-react";
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
 

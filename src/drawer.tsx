@@ -1,5 +1,3 @@
-"use client";
-
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useId, type ReactNode } from "react";
 import { X } from "lucide-react";

@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, type FocusEvent, type ReactNode } from "react";
 
 import { cn } from "./utils";

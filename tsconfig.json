@@ -19,5 +19,5 @@
       "@rahulapgm/skyblue-ui/*": ["src/*"]
     }
   },
-  "include": ["src", "preview", "vite.config.ts"]
+  "include": ["src", "preview", "vite.config.ts", "tsup.config.ts"]
 }
